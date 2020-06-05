@@ -95,7 +95,7 @@ class ConsoleHandler(StreamHandler):
     def format(self, record):
         if isinstance(record.msg, LogObject) or isinstance(record.msg, SqlLogObject):
             created = int(record.created)
-            message = {record.levelname: {datetime.datetime.fromtimestamp(created).isoformat(): record.msg.to_dict}}
+            message = {'severity': record.levelname, 'timestamp': datetime.datetime.fromtimestamp(created).isoformat(), record.msg.to_dict}
 
             try:
                 indent = int(settings.INDENT_CONSOLE_LOG)
