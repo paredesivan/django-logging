@@ -101,9 +101,7 @@ class ConsoleHandler(StreamHandler):
                 indent = int(settings.INDENT_CONSOLE_LOG)
             except (ValueError, TypeError):
                 indent = 1
-            import pprint
-            message = pprint.pformat(message, indent, 160, compact=True)
-            return message
+            return json.dumps(message, separators=(',', ':'))
         elif isinstance(record.msg, ErrorLogObject):
             return str(record.msg)
         elif isinstance(record.msg, dict):
