@@ -96,7 +96,7 @@ class ConsoleHandler(StreamHandler):
         if isinstance(record.msg, LogObject) or isinstance(record.msg, SqlLogObject):
             created = int(record.created)
             message = {record.levelname: {datetime.datetime.fromtimestamp(created).isoformat(): record.msg.to_dict}}
-            msg = {'severity': record.levelname, 'timestamp': datetime.datetime.fromtimestamp(created).isoformat(), record.msg.to_dict}
+            msg = {'severity': record.levelname, 'timestamp': datetime.datetime.fromtimestamp(created).isoformat(), 'message': record.msg.to_dict}
             pprint(msg)
             try:
                 indent = int(settings.INDENT_CONSOLE_LOG)
@@ -108,7 +108,7 @@ class ConsoleHandler(StreamHandler):
         elif isinstance(record.msg, dict):
             created = int(record.created)
             message = {record.levelname: {created: record.msg}}
-            msg = {'severity': record.levelname, 'timestamp': created, record.msg.to_dict}
+            msg = {'severity': record.levelname, 'timestamp': created, 'message': record.msg.to_dict}
             pprint(msg)
             return json.dumps(message, separators=(',', ':'))
         else:
