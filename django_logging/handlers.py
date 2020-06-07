@@ -12,7 +12,6 @@ from . import settings
 from .log_object import LogObject, ErrorLogObject, SqlLogObject
 from elasticsearch import Elasticsearch
 from elasticsearch.exceptions import ConnectionError
-from pprint import pprint
 
 def message_from_record(record):
     if isinstance(record.msg, dict) or isinstance(record.msg, str):
@@ -95,9 +94,7 @@ class ConsoleHandler(StreamHandler):
     def format(self, record):
         if isinstance(record.msg, LogObject) or isinstance(record.msg, SqlLogObject):
             created = int(record.created)
-            message = {record.levelname: {datetime.datetime.fromtimestamp(created).isoformat(): record.msg.to_dict}}
-            msg = {'severity': record.levelname, 'timestamp': datetime.datetime.fromtimestamp(created).isoformat(), 'message': record.msg.to_dict}
-            pprint(msg)
+            message = {'severity': record.levelname, 'timestamp': datetime.datetime.fromtimestamp(created).isoformat(), 'message': record.msg.to_dict}
             try:
                 indent = int(settings.INDENT_CONSOLE_LOG)
             except (ValueError, TypeError):
@@ -107,9 +104,7 @@ class ConsoleHandler(StreamHandler):
             return str(record.msg)
         elif isinstance(record.msg, dict):
             created = int(record.created)
-            message = {record.levelname: {created: record.msg}}
-            msg = {'severity': record.levelname, 'timestamp': created, 'message': record.msg.to_dict}
-            pprint(msg)
+            message = {'severity': record.levelname, 'timestamp': created, 'message': record.msg.to_dict}
             return json.dumps(message, separators=(',', ':'))
         else:
             return super(ConsoleHandler, self).format(record)
