@@ -13,8 +13,6 @@ from .log_object import LogObject, ErrorLogObject, SqlLogObject
 from elasticsearch import Elasticsearch
 from elasticsearch.exceptions import ConnectionError
 
-from pprint import pprint
-
 def message_from_record(record):
     if isinstance(record.msg, dict) or isinstance(record.msg, str):
         if settings.DEBUG:
@@ -94,7 +92,7 @@ class ConsoleHandler(StreamHandler):
         return super(ConsoleHandler, self).emit(record)
 
     def format(self, record):
-        pprint(record)
+        print("DEBUG RECORD:", record)
         if isinstance(record.msg, LogObject) or isinstance(record.msg, SqlLogObject):
             created = int(record.created)
             message = {'severity': record.levelname, 'timestamp': datetime.datetime.fromtimestamp(created).isoformat(), 'message': record.msg.to_dict}
