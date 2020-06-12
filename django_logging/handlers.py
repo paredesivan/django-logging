@@ -92,7 +92,7 @@ class ConsoleHandler(StreamHandler):
         return super(ConsoleHandler, self).emit(record)
 
     def format(self, record):
-        trace = pprint(record.__dict__)
+        trace = record.__dict__
         if isinstance(record.msg, LogObject) or isinstance(record.msg, SqlLogObject):
             created = int(record.created)
             message = {'severity': record.levelname, 'trace': trace, 'timestamp': datetime.datetime.fromtimestamp(created).isoformat(), 'message': record.msg.to_dict}
