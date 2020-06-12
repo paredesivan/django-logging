@@ -1,10 +1,11 @@
 .. role:: python(code)
     :language: python
 
-Unmaintained Fork
+Fork
 ==============
 Commit: https://github.com/cipriantarta/django-logging/commit/809cff15f12ef6baf4e801de33482de182551271
-Custom console stream handler function.
+
+Custom console stream handler.
 
 Django Logging
 ==============
