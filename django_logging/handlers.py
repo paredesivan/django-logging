@@ -92,7 +92,18 @@ class ConsoleHandler(StreamHandler):
         return super(ConsoleHandler, self).emit(record)
 
     def format(self, record):
-        trace = record.__dict__
+        try:
+            trace = {
+                'pathname': record.__dict__["pathname"],
+                'filename': record.__dict__["filename"],
+                'funcName': record.__dict__["funcName"],
+                'module': record.__dict__["module"],
+                'args': record.__dict__["args"],
+                'exc_info': record.__dict__["exc_info"],
+                'exc_text': record.__dict__["exc_text"],
+            }
+        except:
+            trace = {}
         if isinstance(record.msg, LogObject) or isinstance(record.msg, SqlLogObject):
             created = int(record.created)
             message = {'severity': record.levelname, 'trace': trace, 'timestamp': datetime.datetime.fromtimestamp(created).isoformat(), 'message': record.msg.to_dict}
@@ -102,7 +113,9 @@ class ConsoleHandler(StreamHandler):
                 indent = 1
             return json.dumps(message, separators=(',', ':'))
         elif isinstance(record.msg, ErrorLogObject):
-            return str(record.msg)
+            message = {'severity': record.levelname, 'trace': trace, 'timestamp': datetime.datetime.fromtimestamp(created).isoformat(), 'error': record.msg.to_dict}
+            return json.dumps(message, separators=(',', ':'))
+
         elif isinstance(record.msg, dict):
             created = int(record.created)
             message = {'severity': record.levelname, 'trace': trace, 'timestamp': created, 'message': record.msg.to_dict}
