@@ -1,6 +1,10 @@
 .. role:: python(code)
     :language: python
 
+Poorly-maintained Fork
+==============
+Custom update to console log handler: https://github.com/cipriantarta/django-logging/commit/809cff15f12ef6baf4e801de33482de182551271
+
 Django Logging
 ==============
 
