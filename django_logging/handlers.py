@@ -119,7 +119,7 @@ class ConsoleHandler(StreamHandler):
 
         elif isinstance(record.msg, dict):
             created = int(record.created)
-            message = {'severity': record.levelname, 'trace': trace, 'timestamp': created, 'message': record.msg.to_dict}
+            message = {'severity': record.levelname, 'trace': trace, 'timestamp': datetime.datetime.fromtimestamp(created).isoformat(), 'message': record.msg.to_dict}
             return json.dumps(message, separators=(',', ':'))
         else:
             return super(ConsoleHandler, self).format(record)
