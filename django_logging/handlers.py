@@ -113,6 +113,7 @@ class ConsoleHandler(StreamHandler):
                 indent = 1
             return json.dumps(message, separators=(',', ':'))
         elif isinstance(record.msg, ErrorLogObject):
+            created = int(record.created)
             message = {'severity': record.levelname, 'trace': trace, 'timestamp': datetime.datetime.fromtimestamp(created).isoformat(), 'error': record.msg.to_dict}
             return json.dumps(message, separators=(',', ':'))
 
