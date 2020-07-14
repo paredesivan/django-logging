@@ -54,7 +54,7 @@ LOGGING = {
             'formatter': 'verbose',
             'maxBytes': settings.ROTATE_MB * 1024 * 1024,
             'backupCount': settings.ROTATE_COUNT,
-            'when': settings.WHEN,
+            'when': settings.WHEN_INTERVAL,
             'interval': settings.INTERVAL,
             'filename': '{}/app.log'.format(settings.LOG_PATH)
         },
@@ -64,7 +64,7 @@ LOGGING = {
             'formatter': 'verbose',
             'maxBytes': settings.ROTATE_MB * 1024 * 1024,
             'backupCount': settings.ROTATE_COUNT,
-            'when': settings.WHEN,
+            'when': settings.WHEN_INTERVAL,
             'interval': settings.INTERVAL,
             'filename': '{}/debug.log'.format(settings.LOG_PATH)
         },
@@ -74,7 +74,7 @@ LOGGING = {
             'formatter': 'sql',
             'maxBytes': settings.ROTATE_MB * 1024 * 1024,
             'backupCount': settings.ROTATE_COUNT,
-            'when': settings.WHEN,
+            'when': settings.WHEN_INTERVAL,
             'interval': settings.INTERVAL,
             'filename': '{}/sql.log'.format(settings.LOG_PATH)
         }

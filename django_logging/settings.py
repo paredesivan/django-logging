@@ -21,7 +21,7 @@ class DjangoLoggingSettings(object):
             ENCODING='utf-8',
             ROTATE_MB=100,
             ROTATE_COUNT=10,
-            WHEN='D',
+            WHEN_INTERVAL='D',
             INTERVAL=1,
             INDENT_CONSOLE_LOG=2,
             ELASTICSEARCH_ENABLED=False,
